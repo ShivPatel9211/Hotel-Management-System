@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="text-center">
+        <h4>Total Reservation</h4>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 text-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info">
+              {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Room No</th>
+                <th scope="col">Booking Data</th>
+                <th scope="col">Check In Date</th>
+                <th scope="col">Check Out Date</th>
+                <th scope="col">Booked By</th>
+                <th scope="col">Room Rate</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for i in reservation %}
+              <tr>
+                <th scope="row">{{i.room.room_no}}</th>
+                <th scope="row">{{i.booking_date}}</th>
+                <th scope="row">{{i.check_in_date}}</th>
+                <th scope="row">{{i.check_out_date}}</th>
+                <th scope="row">{{i.user.username}}</th>
+                <th scope="row">{{i.room.room_rate}}</th>
+                <th scope="row">{{i.room.room_type}}</th>
+                <th scope="row"><a class="btn btn-danger btn-sm" href="{% url 'manager_cancel_reservation' i.id %}" onclick="return confirm('Are you sure want to cancel reservation?')">Cancel Reservation</a></th>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+{% endblock  %}

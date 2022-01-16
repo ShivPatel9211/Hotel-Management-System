@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info">
+              {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        {%for i in reservation %}
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-1">
+            <div class="card" style="width: auto;">
+                <div class="text-center" style="background-color: rgb(167, 62, 62);">
+                   <p><span style="font-weight: bolder; color: rgb(60, 8, 145);">Room No. </span><span style="font-weight: bolder;">{{i.room.room_no}}</span></p> 
+                </div>
+                <img class="card-img-top" src="{{i.room.image.url}}" alt="Card image cap" style="height:40vh;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <span style="font-weight: bolder;" class="">Room Type: {{i.room.room_type}}</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <span style="font-weight: bolder;"class="badge badge-danger">Only Rs.{{i.room.room_rate}}</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <span style="font-weight: bolder;" class="">Check In Date: {{i.check_in_date}}</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <span style="font-weight: bolder;" class="">Check Out Date: {{i.check_out_date}}</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6 ">
+                            <span style="font-weight: bolder;"class="">No of Bed: {{i.room.no_of_bed}}</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <span style="font-weight: bolder;"class="">No of People : {{i.no_of_people}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                <a href="{%  url 'cancel_reservation' i.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to cancel Your Reservation?')">Cancel Reservation</a>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock  %}

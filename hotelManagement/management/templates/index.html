@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block body %}
+<div class="container">
+    <hr>
+    <div class="text-center">
+        <h3>Available Rooms</h3>
+    </div>
+    <hr>
+    <div class="row">
+        {% for i in room %}
+        <div class="col-lg-4 col-sm-12 mt-3">
+            <div class="card" style="width: 23rem;;">
+                <div class="text-center" style="background-color: rgb(167, 62, 62);">
+                   <p><span style="font-weight: bolder; color: rgb(60, 8, 145);">Room No. </span><span style="font-weight: bolder;">{{i.room_no}}</span></p> 
+                </div>
+                <img class="card-img-top" src="{{i.image.url}}" alt="Card image cap" style="height: 300px;">
+                <div class="card-body">
+                    <div>
+                        <span class="">Room Type: {{i.room_type}}</span>
+                    </div>
+                <div>
+                    <span class="badge badge-danger">Only Rs.{{i.room_rate}}</span>
+                </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'book_room' i.id %}" class="btn btn-success btn-sm">Book This Room</a>
+                    {% if request.user.is_superuser %}
+                    <a href="{% url 'update_room' i.id %}" class="btn btn-warning btn-sm pr-3 pl-3">Update</a>
+                    <a href="{%  url 'delete_room' i.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete ?')">Delete</a>
+                    {% endif %}
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

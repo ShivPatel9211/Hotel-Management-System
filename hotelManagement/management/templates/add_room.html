@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{%block body%}
+<style>
+    body {
+        background: #59ABE3;
+        margin: 0
+    }
+
+    .form {
+        width: 400px;
+        height: 530px;
+        background: #e6e6e6;
+        border-radius: 8px;
+        box-shadow: 0 0 40px -10px #000;
+        margin: calc(44vh - 242px) auto;
+        padding: 20px 30px;
+        max-width: calc(100vw - 40px);
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+        position: relative
+    }
+
+    h2 {
+        margin: 5px 0;
+        padding-bottom: 10px;
+        width: 180px;
+        color: #78788c;
+        border-bottom: 3px solid #78788c
+    }
+
+    input {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+        background: none;
+        outline: none;
+        resize: none;
+        border: 0;
+        font-family: 'Montserrat', sans-serif;
+        transition: all .3s;
+        border-bottom: 2px solid #bebed2
+    }
+
+    input:focus {
+        border-bottom: 2px solid #78788c
+    }
+
+    p:before {
+        content: attr(type);
+        display: block;
+        margin: 10px 0 0;
+        font-size: 14px;
+        color: #5a5a5a
+    }
+
+    button {
+        float: right;
+        padding: 8px 12px;
+        margin: 5px 0 0;
+        font-family: 'Montserrat', sans-serif;
+        border: 2px solid #78788c;
+        background: 0;
+        color: #5a5a6e;
+        cursor: pointer;
+        transition: all .3s
+    }
+
+    button:hover {
+        background: #78788c;
+        color: #fff
+    }
+</style>
+<form class="form" method="post" enctype="multipart/form-data">
+    <div class="col-12 text-center">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info">
+          {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    {% csrf_token %}
+    <h2>Add Room</h2>
+    <p type="Room No:"><input type="text" name="room_no" placeholder="Room No"></input></p>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <p type="Room Type:"><select name="room_type" id="">
+                    <option value="Ac">Ac</option>
+                    <option value="Non Ac">Non Ac</option>
+                </select></p>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <p type="No of Bed Available:"><select name="no_of_bed" id="" style="width: 70px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select></p>
+        </div>
+    </div>
+    <p type="Room's Picture "><input type="file" name="image"></input></p>
+    <p type="Room Rate:"><input type="text" name="room_rate" placeholder="Room Rate"></input></p>
+    <button class="btn btn-success btn-lg" type="submit">Add</button>
+</form>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="text-center">
+        <h4>Total User</h4>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 text-center">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info">
+              {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone No</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for i in profile %}
+              <tr>
+                <th scope="row">{{i.user.username}}</th>
+                <th scope="row">{{i.user.first_name}}</th>
+                <th scope="row">{{i.user.last_name}}</th>
+                <th scope="row">{{i.user.email}}</th>
+                <th scope="row">{{i.address}}</th>
+                <th scope="row">{{i.phone}}</th>
+                <th scope="row"><a class="btn btn-danger btn-sm" href="{% url 'delete_user' i.user.id %}" onclick="return confirm('Are you sure want to delete?')">Delete User</a></th>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+{% endblock  %}
